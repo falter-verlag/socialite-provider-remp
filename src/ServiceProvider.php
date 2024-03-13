@@ -4,6 +4,7 @@ namespace Remp\Auth\Socialite;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 use Laravel\Socialite\Contracts\Factory;
+use Laravel\Socialite\SocialiteManager;
 
 class ServiceProvider extends LaravelServiceProvider
 {
@@ -13,10 +14,15 @@ class ServiceProvider extends LaravelServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function boot()
     {
-        $this->app->singleton(Factory::class, function ($app) {
-            return new Manager($app);
+        /** @var SocialiteManager $socialite */
+        $socialite = $this->app->make(Factory::class);
+
+        $socialite->extend('remp', function () use ($socialite) {
+            $config = config('services.remp');
+
+            return $socialite->buildProvider(Provider::class, $config);
         });
     }
 }
