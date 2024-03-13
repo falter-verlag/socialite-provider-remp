@@ -1,0 +1,35 @@
+{
+  "name": "falter-verlag/socialite-provider-remp",
+  "description": "REMP OAuth 2.0 Client Provider for Laravel Socialite",
+  "license": "MIT",
+  "authors": [],
+  "keywords": [],
+  "require": {
+    "php": "^8.0",
+    "illuminate/support": "^8.0 || ^9.0 || ^10.0 || ^11.0",
+    "laravel/socialite": "^5.2"
+  },
+  "require-dev": {
+    "mockery/mockery": "^1.0",
+    "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0|^9.0",
+    "phpstan/phpstan": "^1.10",
+    "phpunit/phpunit": "^8.0|^9.3|^10.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Remp\\Auth\\Socialite\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Remp\\Auth\\Socialite\\ServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
