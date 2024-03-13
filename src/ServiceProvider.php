@@ -1,5 +1,7 @@
 <?php
 
+namespace Remp\Auth\Socialite;
+
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 use Laravel\Socialite\Contracts\Factory;
 use Laravel\Socialite\SocialiteManager;

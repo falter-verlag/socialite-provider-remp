@@ -1,5 +1,6 @@
 <?php
 
+namespace Remp\Auth\Socialite;
 
 use GuzzleHttp\Psr7\Stream;
 use GuzzleHttp\RequestOptions;
