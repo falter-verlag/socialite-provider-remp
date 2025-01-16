@@ -33,7 +33,7 @@ class Provider extends AbstractProvider
     protected function getAuthUrl($state)
     {
         return $this->buildAuthUrlFromBase(
-            $this->getRempUrl() . 'oauth/authorize',
+            $this->getRempUrl() . '/oauth/authorize',
             $state,
         );
     }
