@@ -28,12 +28,12 @@ class Provider extends AbstractProvider
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getAuthUrl($state)
     {
         return $this->buildAuthUrlFromBase(
-            $this->getRempUrl() . '/oauth/authorize',
+            $this->getRempUrl().'/oauth/authorize',
             $state,
         );
     }
@@ -41,34 +41,34 @@ class Provider extends AbstractProvider
     /**
      * Get the default options for an HTTP request.
      *
-     * @param string $token
+     * @param  string  $token
      * @return array
      */
     protected function getRequestOptions($token)
     {
         return [
             RequestOptions::HEADERS => [
-                'Accept'        => 'application/json',
-                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.$token,
             ],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getTokenUrl()
     {
-        return $this->getRempUrl() . '/oauth/access-token';
+        return $this->getRempUrl().'/oauth/access-token';
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getUserByToken($token)
     {
         $response = $this->getHttpClient()->get(
-            $this->getRempUrl() . '/api/v1/user/info?source=oauth_token',
+            $this->getRempUrl().'/api/v1/user/info?source=oauth_token',
             $this->getRequestOptions($token),
         );
 
@@ -80,13 +80,13 @@ class Provider extends AbstractProvider
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function mapUserToObject(array $user)
     {
-        return (new User())->setRaw($user)->map([
-            'id'    => Arr::get($user, 'user.id'),
-            'name'  => implode(
+        return (new User)->setRaw($user)->map([
+            'id' => Arr::get($user, 'user.id'),
+            'name' => implode(
                 ' ',
                 array_filter([
                     Arr::get($user, 'user.first_name'),

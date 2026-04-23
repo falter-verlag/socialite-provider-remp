@@ -22,10 +22,10 @@ abstract class TestCase extends BaseTestCase
     protected function defineEnvironment($app)
     {
         $app['config']->set('services.remp', [
-            'client_id'     => 'test-client-id',
+            'client_id' => 'test-client-id',
             'client_secret' => 'test-client-secret',
-            'redirect'      => 'https://app.test/auth/remp/callback',
-            'remp_url'      => 'https://crm.example.test',
+            'redirect' => 'https://app.test/auth/remp/callback',
+            'remp_url' => 'https://crm.example.test',
         ]);
     }
 }

@@ -8,7 +8,6 @@ use Laravel\Socialite\SocialiteManager;
 
 class ServiceProvider extends LaravelServiceProvider
 {
-
     /**
      * Register the service provider.
      *

@@ -13,7 +13,7 @@ use Remp\Auth\Socialite\Provider;
 
 class ProviderTest extends TestCase
 {
-    private function makeProvider(Request $request = null): Provider
+    private function makeProvider(?Request $request = null): Provider
     {
         return new Provider(
             $request ?? Request::create('/'),
@@ -42,10 +42,10 @@ class ProviderTest extends TestCase
     private function rempUserPayload(array $overrides = []): array
     {
         return ['user' => array_merge([
-            'id'         => 42,
+            'id' => 42,
             'first_name' => 'Toni',
-            'last_name'  => 'Hofer',
-            'email'      => 'toni@example.test',
+            'last_name' => 'Hofer',
+            'email' => 'toni@example.test',
         ], $overrides)];
     }
 
@@ -95,9 +95,9 @@ class ProviderTest extends TestCase
     public function test_returns_default_remp_url_when_not_configured()
     {
         config()->set('services.remp', [
-            'client_id'     => 'test-client-id',
+            'client_id' => 'test-client-id',
             'client_secret' => 'test-client-secret',
-            'redirect'      => 'https://app.test/auth/remp/callback',
+            'redirect' => 'https://app.test/auth/remp/callback',
         ]);
 
         $this->assertSame('http://localhost:8080', $this->makeProvider()->getRempUrl());
@@ -114,7 +114,7 @@ class ProviderTest extends TestCase
         $url = $response->getTargetUrl();
         $this->assertStringStartsWith('https://crm.example.test/oauth/authorize?', $url);
         $this->assertStringContainsString('client_id=test-client-id', $url);
-        $this->assertStringContainsString('redirect_uri=' . urlencode('https://app.test/auth/remp/callback'), $url);
+        $this->assertStringContainsString('redirect_uri='.urlencode('https://app.test/auth/remp/callback'), $url);
         $this->assertStringContainsString('response_type=code', $url);
         $this->assertStringContainsString('scope=default', $url);
         $this->assertMatchesRegularExpression('/[?&]state=[^&]+/', $url);
@@ -131,7 +131,7 @@ class ProviderTest extends TestCase
                 'https://crm.example.test/api/v1/user/info?source=oauth_token',
                 [
                     'headers' => [
-                        'Accept'        => 'application/json',
+                        'Accept' => 'application/json',
                         'Authorization' => 'Bearer TKN',
                     ],
                 ]
@@ -148,7 +148,7 @@ class ProviderTest extends TestCase
     {
         $request = $this->requestWithSession([
             'state' => 'matching-state',
-            'code'  => 'auth-code',
+            'code' => 'auth-code',
         ]);
         $request->session()->put('state', 'matching-state');
 
@@ -167,9 +167,9 @@ class ProviderTest extends TestCase
                 })
             )
             ->andReturn($this->jsonResponse([
-                'access_token'  => 'TKN',
+                'access_token' => 'TKN',
                 'refresh_token' => 'RFR',
-                'expires_in'    => 3600,
+                'expires_in' => 3600,
             ]));
 
         $http->shouldReceive('get')
@@ -178,7 +178,7 @@ class ProviderTest extends TestCase
                 'https://crm.example.test/api/v1/user/info?source=oauth_token',
                 [
                     'headers' => [
-                        'Accept'        => 'application/json',
+                        'Accept' => 'application/json',
                         'Authorization' => 'Bearer TKN',
                     ],
                 ]
